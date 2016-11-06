@@ -67,20 +67,18 @@ def write(newJson, latlonglist, h):
 	sheet1.write(3, 0, "Sun Elevation")
 	sheet1.write(4, 0, "Lat")
 	sheet1.write(5, 0, "Long")
-	toReturn = None
 	for i in range(1, 6):
 		sheet1.write(4, i, latlonglist[i - 1][1])
 		sheet1.write(5, i, latlonglist[i - 1][0])
 	sheet1.write(6, 0, "H value")
 	sheet1.write(6, 1, h)
+	m.update(" ".join([str(i) for i in latlonglist[0]]))
+	toReturn = m.hexdigest()
 	for i in range(0, len(newJson['features'])):
 		
 		tempParse = newJson['features'][i]['properties']['acquired'].split('T') 
 		tempParse[1] = tempParse[1].split('.')[0].split('Z')[0]
 		tempParse = " ".join(tempParse)
-		if i == 0:
-			m.update(tempParse)
-			toReturn = m.hexdigest()
 		matList = [ 
 					tempParse,
 					newJson['features'][i]['properties']['cloud_cover'],
@@ -91,10 +89,3 @@ def write(newJson, latlonglist, h):
 			sheet1.write(j, i + 1, matList[j])
 	book.save("./spreadsheets/{0}.xls".format(toReturn))
 	return toReturn
-"""
-result = getReq()
-newJson = json.loads(result.text)
-h = getH(30, 30)
-area = getArea(newJson)
-write(newJson, area, h)
-"""

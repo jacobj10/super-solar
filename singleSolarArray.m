@@ -16,7 +16,7 @@ lats = cell2mat(lats);
 longs = datarray(6,[1:5]);
 longs = cell2mat(longs);
 
-A = 1;
+A = areafunction(longs,lats);
 
 times=datarray(1,:);
 %try this
@@ -73,7 +73,7 @@ subplot(2,2,2)
 p = plot(times,energyOutputs,'b.','MarkerSize',15);
 set(figure(1), 'Position',[0 0 1000 750])
 axis equal
-title({'Energy Output of Solar Array Over Time', 'Per Unit Area'},'FontSize',11)
+title({'Energy Output of Solar Array Over Time', ''},'FontSize',11)
 xlabel('Time','FontName','AvantGarde')
 ylabel('Energy Output (Kilowatt Hours-kWh)','FontName','AvantGarde')
 axis square
