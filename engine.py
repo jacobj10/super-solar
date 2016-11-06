@@ -1,7 +1,7 @@
 import os
 import json
 import ast
-import matlab.engine
+import mlab
 
 from gi.repository import Gtk
 from search_endpoint import getReq, getH, write
@@ -9,10 +9,8 @@ gtk_builder_file = os.path.splitext(__file__)[0] + '.ui'
 
 class Engine():
 	def __init__(self):
-		eng = matlab.engine.start_matlab()
 		self.builder = Gtk.Builder()
 		self.builder.add_from_file(gtk_builder_file)
-
 		self.window = self.builder.get_object('mainWindow')
 		self.button = self.builder.get_object('genButton')
 		self.checkbox = self.builder.get_object('writeFile')
@@ -33,7 +31,6 @@ class Engine():
 		self.window.show()
 
 	def signal_window_destroy(self, _):
-		eng.quit()
 		self.window.destroy()
 		Gtk.main_quit()
 
@@ -59,5 +56,6 @@ class Engine():
 		elif openTab == 3:
 			return [ None, ]
 		return None
+
 x = Engine()
 Gtk.main()
