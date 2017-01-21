@@ -23,7 +23,6 @@ class Engine():
 	def __init__(self):
 		self.hashes = {}
 		self.mult = False
-
 		self.eng = matlab.engine.start_matlab('-nodisplay')
 		self.builder = Gtk.Builder()
 		self.builder.add_from_file(gtk_builder_file)
@@ -153,5 +152,6 @@ class Engine():
 			return True
 		return
 
-x = Engine()
-Gtk.main()
+if __name__ == '__main__':
+	x = Engine()
+	Gtk.main()
